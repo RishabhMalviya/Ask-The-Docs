@@ -26,7 +26,7 @@ def save_sub_library_urls(sub_library: str = "Ray RLlib") -> None:
         "urls" : ['https://docs.ray.io/en/latest/' + link_tag.get('href')[2:] for link_tag in sub_library_tags.find_all("a")]
     }
     
-    with open(f"./data/ray/urls/{sub_library_name_simplified}.yaml", "w+") as f:
+    with open(f"./data/urls/{sub_library_name_simplified}.yaml", "w+") as f:
         yaml.dump(sub_library_urls, f)
 
 
@@ -37,13 +37,13 @@ def extract_text(sub_library: str = "Ray RLlib"):
     """
     sub_library_name_simplified = re.sub(r"( )+", lambda x: "_", sub_library).lower()
     
-    urls = yaml.safe_load(Path(f"./data/ray/urls/{sub_library_name_simplified}.yaml").read_text())["urls"]
+    urls = yaml.safe_load(Path(f"./data/urls/{sub_library_name_simplified}.yaml").read_text())["urls"]
 
     for idx, url in enumerate(urls):
         print(f'Parsing URL {idx+1}/{len(urls)}: {url}')
 
         page_name = url.split('/')[-1][:-5]
-        output_filepath = f"./data/ray/text/{sub_library_name_simplified}/{page_name}.txt"
+        output_filepath = f"./data/text/{sub_library_name_simplified}/{page_name}.txt"
         os.makedirs(os.path.dirname(output_filepath), exist_ok=True)
         with open(output_filepath, "w+") as f:
             yaml.dump(get_cleaned_text(url), f)
