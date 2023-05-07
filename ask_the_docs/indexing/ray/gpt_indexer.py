@@ -4,7 +4,7 @@ import re
 from llama_index import GPTSimpleVectorIndex, SimpleDirectoryReader
 
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = '...'
 
 
 def index(sub_library="Ray RLlib"):
